@@ -1,0 +1,6 @@
+nohup: ignoring input
+Forwarding from 0.0.0.0:443 -> 44error: lost connection to pod
+Handling connection for 443
+Handling connection for 443
+Handling connection for 443
+error: lost connection to pod
