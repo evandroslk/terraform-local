@@ -1,0 +1,34 @@
+resource "kubernetes_manifest" "letsencrypt_dns_prod" {
+  manifest = {
+    apiVersion = "cert-manager.io/v1"
+    kind       = "ClusterIssuer"
+
+    metadata = {
+      name = "letsencrypt-dns-prod"
+    }
+
+    spec = {
+      acme = {
+        email  = "evandroslk@gmail.com"
+        server = "https://acme-v02.api.letsencrypt.org/directory"
+
+        privateKeySecretRef = {
+          name = "letsencrypt-dns-prod-key"
+        }
+
+        solvers = [
+          {
+            dns01 = {
+              cloudflare = {
+                apiTokenSecretRef = {
+                  name = "cloudflare-api-token"
+                  key  = "CF_DNS_API_TOKEN"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
